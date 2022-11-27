@@ -12,7 +12,7 @@ contract RDTtoken is ERC20, Ownable {
 
     event mintEvent(address to, uint256 amount);
     event autoMintEvent(address to, uint256 amount);
-
+                                                                                                                            
     constructor() ERC20("RdtToken", "RDT") {}
 
     //此修饰器获取读者阅读时间与读者地址
