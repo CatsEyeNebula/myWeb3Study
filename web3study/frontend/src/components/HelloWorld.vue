@@ -25,9 +25,44 @@ export default {
     this.nftAdr = nft
     this.tokenAdr = token
     this.checkIfWalletIsConnected();
-   
+    this.checkIfRightChain();
   },
   methods: {
+
+    //check if the chain is the right chain if it's not in the right chain then change to the right chain 
+    checkIfRightChain:async function(){
+    try {
+    await ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: '0x539' }],
+});
+  } catch (switchError) {
+  // This error code indicates that the chain has not been added to MetaMask.
+  if (switchError.code === 4902) {
+    try {
+      await ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: '0x539',
+            chainName: 'ganache',
+            rpcUrls: ['https://127.0.0.1:7545'] /* ... */,
+          },
+        ],
+      });
+      await ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '0x539' }],
+})
+    } catch (addError) {
+      // handle "add" error
+    }
+  }
+  // handle other "switch" errors
+}
+    },
+
+    //check if the wallet is connected or not
     checkIfWalletIsConnected: async function() {
       try {
         const { ethereum } = window;
