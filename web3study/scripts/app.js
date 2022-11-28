@@ -10,7 +10,6 @@ const {PRIVATE_KEY2,NFTCONTRACT,TOKENCONTRACT,MYADDRESS} = process.env;
 
 //provider
     const provider = new hre.ethers.providers.Web3Provider(web3.currentProvider);//ganache作为provider 检测当前网络环境为ganache
-
 //signer - you
     const signer = new hre.ethers.Wallet(PRIVATE_KEY2,provider)
 
@@ -32,7 +31,7 @@ const {PRIVATE_KEY2,NFTCONTRACT,TOKENCONTRACT,MYADDRESS} = process.env;
         }
     }
 
-    // main();//调用循环mint
+    main();//调用循环mint
 
    
     
